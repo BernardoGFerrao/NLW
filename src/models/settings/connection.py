@@ -1,14 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-class DBConecctionHandler:
+class __DBConecctionHandler:
     def __init__(self) -> None:#Construtor
         self.__conecction_string = "{}:///{}".format(
             "sqlite",
-            "D:\PycharmProjects\HashtagTreinamentos\RocketSeat\NLW\storage.db"
+            r"D:\PycharmProjects\HashtagTreinamentos\RocketSeat\NLW\storage.db"
         )
         self.__engine = None
-        self.__session = None
+        self.session = None
 
     def connect_to_db(self) -> None:
         self.__engine = create_engine(self.__conecction_string)
@@ -18,10 +18,10 @@ class DBConecctionHandler:
 
     def __enter__(self):
         session_maker = sessionmaker()
-        self.__session = session_maker(bind=self.__engine)
+        self.session = session_maker(bind=self.__engine)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.__session.close()
+        self.session.close()
 
-
+db_connection_handler = __DBConecctionHandler()
