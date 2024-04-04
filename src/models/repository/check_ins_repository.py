@@ -1,6 +1,7 @@
 from RocketSeat.NLW.src.models.settings.connection import db_connection_handler
 from RocketSeat.NLW.src.models.entities.check_ins import CheckIns
 from sqlalchemy.exc import IntegrityError, NoResultFound
+from RocketSeat.NLW.src.errors.error_types.http_conflict import HTTPConflictError
 
 class CheckInRepository:
     def insert_check_in(self, attendee_id: str) -> str:
@@ -13,7 +14,7 @@ class CheckInRepository:
                     database.session.commit()
                     return attendee_id
                 except IntegrityError:
-                    raise Exception('Checkin já cadastrado!')
+                    raise HTTPConflictError('Checkin já cadastrado!')
                 except Exception as exception:
                     database.session.rollback()
                     raise exception

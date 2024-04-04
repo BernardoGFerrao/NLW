@@ -1,6 +1,7 @@
 from RocketSeat.NLW.src.models.repository.check_ins_repository import CheckInRepository
 from RocketSeat.NLW.src.http_types.http_request import HttpRequest
 from RocketSeat.NLW.src.http_types.http_response import HttpResponse
+from RocketSeat.NLW.src.errors.error_types.http_not_found import HTTPNotFoundError
 
 class CheckInHandler:
   def __init__(self) -> None:

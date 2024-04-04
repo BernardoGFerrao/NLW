@@ -3,6 +3,7 @@ from RocketSeat.NLW.src.models.settings.connection import db_connection_handler
 from RocketSeat.NLW.src.models.entities import Events
 from RocketSeat.NLW.src.models.entities.attendees import Attendees
 from sqlalchemy.exc import IntegrityError, NoResultFound
+from RocketSeat.NLW.src.errors.error_types.http_conflict import HTTPConflictError
 
 
 class EventsRepository:
@@ -21,7 +22,7 @@ class EventsRepository:
 
                 return eventsInfo
             except IntegrityError:
-                raise Exception('Evento já cadastrado!')
+                raise HTTPConflictError('Evento já cadastrado!')
             except Exception as exception:
                 database.session.rollback()#Deu problema -> Volta pro estado anterior
                 raise exception

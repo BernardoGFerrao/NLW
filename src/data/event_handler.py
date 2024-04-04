@@ -2,6 +2,8 @@ from RocketSeat.NLW.src.models.repository.events_repository import EventsReposit
 from RocketSeat.NLW.src.http_types.http_request import HttpRequest
 from RocketSeat.NLW.src.http_types.http_response import HttpResponse
 import uuid
+from RocketSeat.NLW.src.errors.error_types.http_not_found import HTTPNotFoundError
+
 class EventHandler:
     def __init__(self) -> None:
         self.__events_repository = EventsRepository()
@@ -19,7 +21,7 @@ class EventHandler:
     def find_by_id(self, http_request: HttpRequest) -> HttpResponse:
         event_id = http_request.param["event_id"]
         event = self.__events_repository.get_event_by_id(event_id)
-        if not event: raise Exception("Evento não encontrado")
+        if not event: raise HTTPNotFoundError("Evento não encontrado")
 
         event_attendees_count = self.__events_repository.count_event_attendees(event_id)
 
