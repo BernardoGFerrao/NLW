@@ -9,4 +9,7 @@ CORS(app)
 
 #Criação de rotas
 from RocketSeat.NLW.src.main.routes.event_routes import event_route_bp
+from RocketSeat.NLW.src.main.routes.attendees_routes import attendees_route_bp
+
 app.register_blueprint(event_route_bp)
+app.register_blueprint(attendees_route_bp)
