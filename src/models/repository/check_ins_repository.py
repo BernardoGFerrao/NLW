@@ -4,10 +4,10 @@ from sqlalchemy.exc import IntegrityError, NoResultFound
 
 class CheckInRepository:
     def insert_check_in(self, attendee_id: str) -> str:
-            with db_connection_handler.cursor() as database:
+            with db_connection_handler as database:
                 try:
                     check_in = (
-                        CheckIns(attendeId=attendee_id)
+                        CheckIns(attendeeId=attendee_id)
                     )
                     database.session.add(check_in)
                     database.session.commit()
